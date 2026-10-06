@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Usuarios - RAIZA</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="contenedor">
+        <!-- Panel Izquierdo: Formulario -->
+        <div class="panel">
+            <h2>Registrar / Editar Usuario</h2>
+            <form id="formRegistro">
+                <label>Nombre:</label> 
+                <input type="text" id="nombre" required>
+                
+                <label>Correo:</label> 
+                <input type="email" id="correo" required>
+                
+                <label>Contraseña:</label> 
+                <input type="password" id="contrasena" required>
+                
+                <label>Rol:</label>
+                <select id="rol">
+                    <option value="Estudiante">Estudiante</option>
+                    <option value="Instructor">Instructor</option>
+                    <option value="Administrador">Administrador</option>
+                </select>
+                
+                <button type="submit" id="btnGuardar" style="margin-top:10px;">Guardar Usuario</button>
+                <button type="button" id="btnCancelar" style="margin-top:10px; display:none; background-color: #dc3545;">Cancelar Edición</button>
+            </form>
+        </div>
+
+        <!-- Panel Derecho: Tabla -->
+        <div class="panel">
+            <h2>Lista de Usuarios</h2>
+            <button id="btnCargar" class="btn-secundario">Actualizar Lista</button>
+            
+            <!-- Contenedor con scroll para la tabla -->
+            <div class="contenedor-tabla">
+                <table id="tablaUsuarios">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Rol</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Los datos se inyectarán aquí con JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

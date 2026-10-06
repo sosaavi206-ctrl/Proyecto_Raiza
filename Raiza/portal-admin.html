@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Panel de Administración - RAIZA</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+
+        <!-- Menú Lateral -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <img src="https://via.placeholder.com/150?text=Admin" alt="Mi Foto" id="imgPerfilSidebar" class="sidebar-foto">
+                <h2 class="sidebar-titulo">Administración</h2>
+            </div>
+
+            <button class="sidebar-btn activo" onclick="cambiarSeccion('resumen', this)">Resumen General</button>
+            <button class="sidebar-btn" onclick="cambiarSeccion('usuarios', this)">Gestión de Usuarios</button>
+            <button class="sidebar-btn" onclick="cambiarSeccion('pedidos', this)">Pedidos de Kits</button>
+
+            <button class="sidebar-btn sidebar-btn-logout" onclick="cerrarSesionAdmin()">Cerrar Sesión</button>
+        </nav>
+
+        <!-- Área de Contenido Principal -->
+        <main class="dashboard-content">
+
+            <!-- SECCIÓN: RESUMEN -->
+            <div id="resumen" class="panel seccion-dashboard activa">
+                <h2>Panel de Administración</h2>
+                <p>Gestiona los usuarios, los roles y el funcionamiento general de la plataforma RAIZA.</p>
+
+                <div class="resumen-grid">
+                    <div class="tarjeta-panel-dashboard">
+                        <h3 class="tarjeta-titulo">👥 Total de Usuarios</h3>
+                        <div class="circulo-progreso" style="width: 120px; height: 120px; background: var(--beige-claro);">
+                            <div class="circulo-interno" style="width: 92px; height: 92px;">
+                                <span class="circulo-texto" id="statTotalUsuarios" style="font-size: 1.4rem;">–</span>
+                            </div>
+                        </div>
+                        <p class="progreso-subtext">Cuentas registradas</p>
+                    </div>
+
+                    <div class="tarjeta-panel-dashboard">
+                        <h3 class="tarjeta-titulo">🎓 Estudiantes</h3>
+                        <p style="font-size: 2.4rem; font-weight: 700; color: var(--verde-oliva); margin: 10px 0;" id="statEstudiantes">–</p>
+                        <p class="progreso-subtext">Estudiantes activos</p>
+                    </div>
+
+                    <div class="tarjeta-panel-dashboard">
+                        <h3 class="tarjeta-titulo">🧑‍🏫 Instructores</h3>
+                        <p style="font-size: 2.4rem; font-weight: 700; color: var(--terracota-coral); margin: 10px 0;" id="statInstructores">–</p>
+                        <p class="progreso-subtext">Instructores activos</p>
+                    </div>
+
+                    <div class="tarjeta-panel-dashboard">
+                        <h3 class="tarjeta-titulo">🛠 Accesos Directos</h3>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <button class="btn-secundario" style="width: 100%; padding: 10px;" onclick="cambiarSeccion('usuarios', document.querySelectorAll('.sidebar-btn')[1])">
+                                Registrar nuevo usuario
+                            </button>
+                            <a href="index.html" class="btn-secundario" style="width: 100%; padding: 10px; box-sizing: border-box; text-decoration: none;">
+                                Ver página principal
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN: GESTIÓN DE USUARIOS (CRUD) -->
+            <div id="usuarios" class="seccion-dashboard">
+                <h2>Gestión de Usuarios</h2>
+                <p>Registra cuentas, asigna roles (Estudiante, Instructor o Administrador) y administra su estado.</p>
+
+                <div class="contenedor" style="margin-top: 25px;">
+                    <!-- Panel Izquierdo: Formulario -->
+                    <div class="panel">
+                        <h2 id="tituloFormulario">Registrar Usuario</h2>
+                        <form id="formRegistro">
+                            <label>Nombre:</label>
+                            <input type="text" id="nombre" required>
+
+                            <label>Correo:</label>
+                            <input type="email" id="correo" required>
+
+                            <label>Contraseña:</label>
+                            <input type="password" id="contrasena" required autocomplete="new-password">
+
+                            <label>Rol:</label>
+                            <select id="rol">
+                                <option value="Estudiante">Estudiante</option>
+                                <option value="Instructor">Instructor</option>
+                                <option value="Administrador">Administrador</option>
+                            </select>
+
+                            <button type="submit" id="btnGuardar" style="margin-top: 16px;">Guardar Usuario</button>
+                            <button type="button" id="btnCancelar" class="btn-peligro" style="margin-top: 10px; display: none;">Cancelar Edición</button>
+                        </form>
+                    </div>
+
+                    <!-- Panel Derecho: Tabla -->
+                    <div class="panel">
+                        <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap;">
+                            <h2 style="margin: 0;">Lista de Usuarios</h2>
+                            <button id="btnCargar" class="btn-secundario" style="padding: 8px 18px;">Actualizar Lista</button>
+                        </div>
+
+                        <div class="contenedor-tabla">
+                            <table id="tablaUsuarios">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Correo</th>
+                                        <th>Rol</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Los datos se inyectan con JavaScript (app.js) -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN: PEDIDOS DE KITS -->
+            <div id="pedidos" class="seccion-dashboard">
+                <h2>Pedidos de Kits</h2>
+                <p>Consulta las solicitudes de kits de materiales y actualiza su estado (Enviado, Entregado, Cancelado…) para ir desbloqueando los módulos de los estudiantes.</p>
+
+                <div style="display: flex; justify-content: flex-end; margin-top: 22px;">
+                    <button class="btn-secundario" style="padding: 8px 18px;" onclick="cargarPedidos()">Actualizar Lista</button>
+                </div>
+
+                <div class="contenedor-tabla" style="margin-top: 12px;">
+                    <table id="tablaPedidos">
+                        <thead>
+                            <tr>
+                                <th>Pedido</th>
+                                <th>Kit</th>
+                                <th>Estudiante</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Los datos se inyectan con JavaScript (app.js) -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

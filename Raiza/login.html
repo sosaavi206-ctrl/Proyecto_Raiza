@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Iniciar Sesión - RAIZA</title>
+
+    <!-- Evita el 404 de favicon.ico mientras no exista un icono real -->
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google reCAPTCHA v2 (hl=es fuerza el idioma español) -->
+    <script src="https://www.google.com/recaptcha/api.js?hl=es" async defer></script>
+</head>
+<body>
+    <main class="login-card">
+        <h2>RAIZA</h2>
+
+        <!-- Pestañas para cambiar entre Login y Registro -->
+        <div class="auth-tabs">
+            <button type="button" class="tab-btn activo" id="tabLogin" onclick="cambiarVista('login')">Ingresar</button>
+            <button type="button" class="tab-btn" id="tabRegistro" onclick="cambiarVista('registro')">Registrarse</button>
+        </div>
+
+        <!-- Oculta por defecto; login.js la muestra con style.display = 'block' -->
+        <div id="alertaBox" class="mensaje-alerta" role="alert" aria-live="polite" hidden></div>
+
+        <!-- FORMULARIO DE INICIO DE SESIÓN -->
+        <form id="formLogin" onsubmit="enviarLogin(event)">
+            <div class="form-group">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" id="email" name="email" required
+                       placeholder="correo@ejemplo.com" autocomplete="email">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" name="password" required
+                           placeholder="••••••••" autocomplete="current-password">
+                    <button type="button" class="btn-mostrar-pass" onclick="togglePassword('password', this)" aria-label="Mostrar contraseña">👁️</button>
+                </div>
+            </div>
+
+            <!-- Site key de PRUEBAS de Google: reemplazar por la real antes de producción -->
+            <div class="recaptcha-container">
+                <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+            </div>
+
+            <button type="submit" class="btn-submit">Iniciar Sesión</button>
+            
+            <div class="extra-links">
+                <p><a href="#" onclick="mostrarVistaRecuperar(event)">¿Has olvidado tu contraseña?</a></p>
+            </div>
+        </form>
+
+        <!-- FORMULARIO DE REGISTRO (Oculto por defecto) -->
+        <form id="formRegistro" onsubmit="enviarRegistro(event)" style="display: none;">
+            <div class="form-group">
+                <label for="regNombre">Nombre Completo</label>
+                <input type="text" id="regNombre" name="regNombre" required 
+                       placeholder="Tu nombre" autocomplete="name">
+            </div>
+
+            <div class="form-group">
+                <label for="regEmail">Correo Electrónico</label>
+                <input type="email" id="regEmail" name="regEmail" required 
+                       placeholder="correo@ejemplo.com" autocomplete="email">
+            </div>
+            
+            <div class="form-group">
+                <label for="regPassword">Crea una Contraseña</label>
+                <div class="input-wrapper">
+                    <input type="password" id="regPassword" name="regPassword" required 
+                           placeholder="••••••••" autocomplete="new-password">
+                    <button type="button" class="btn-mostrar-pass" onclick="togglePassword('regPassword', this)" aria-label="Mostrar contraseña">👁️</button>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn-submit">Crear Cuenta</button>
+        </form>
+    </main>
+
+    <!-- Banner de Cookies -->
+    <div id="cookieBanner" class="cookie-banner" role="region" aria-label="Aviso de cookies">
+        <div class="cookie-content">
+            <p>Usamos cookies para garantizar la seguridad de tu sesión y mejorar tu experiencia en la plataforma.</p>
+            <button type="button" id="btnAceptarCookies" class="btn-submit btn-cookies">Aceptar</button>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

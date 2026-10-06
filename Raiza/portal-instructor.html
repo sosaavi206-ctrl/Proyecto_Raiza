@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Portal del Instructor - RAIZA</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+
+        <!-- Menú Lateral -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <img src="https://via.placeholder.com/150?text=Instructor" alt="Mi Foto" id="imgPerfilSidebar" class="sidebar-foto">
+                <h2 class="sidebar-titulo">Portal Instructor</h2>
+            </div>
+
+            <button class="sidebar-btn activo" onclick="cambiarSeccion('resumen', this)">Resumen General</button>
+            <button class="sidebar-btn" onclick="cambiarSeccion('revision', this)">Revisar Tareas</button>
+            <button class="sidebar-btn" onclick="cambiarSeccion('estudiantes', this)">Mis Estudiantes</button>
+            <button class="sidebar-btn" onclick="cambiarSeccion('modulos', this)">Módulos Impartidos</button>
+
+            <button class="sidebar-btn sidebar-btn-logout" onclick="cerrarSesionInstructor()">Cerrar Sesión</button>
+        </nav>
+
+        <!-- Área de Contenido Principal -->
+        <main class="dashboard-content">
+
+            <!-- SECCIÓN: RESUMEN -->
+            <div id="resumen" class="seccion-dashboard activa">
+                <h2 id="tituloBienvenida">Hola, Instructor</h2>
+                <p>Aquí puedes consultar las entregas de tus estudiantes, calificarlas y dar seguimiento a tu grupo.</p>
+
+                <div class="resumen-grid">
+                    <div class="tarjeta-panel-dashboard">
+                        <h3 class="tarjeta-titulo">🎓 Estudiantes</h3>
+                        <p style="font-size: 2.4rem; font-weight: 700; color: var(--verde-oliva); margin: 10px 0;" id="statEstudiantes">–</p>
+                        <p class="progreso-subtext">Estudiantes inscritos</p>
+                    </div>
+
+                    <div class="tarjeta-panel-dashboard">
+                        <h3 class="tarjeta-titulo">📥 Entregas por revisar</h3>
+                        <p style="font-size: 2.4rem; font-weight: 700; color: var(--terracota-coral); margin: 10px 0;" id="statPendientes">–</p>
+                        <p class="progreso-subtext">Trabajos sin calificar</p>
+                    </div>
+
+                    <div class="tarjeta-panel-dashboard">
+                        <h3 class="tarjeta-titulo">✅ Entregas calificadas</h3>
+                        <p style="font-size: 2.4rem; font-weight: 700; color: var(--verde-exito); margin: 10px 0;" id="statCalificadas">–</p>
+                        <p class="progreso-subtext">Trabajos con nota</p>
+                    </div>
+
+                    <div class="tarjeta-panel-dashboard">
+                        <h3 class="tarjeta-titulo">🧭 Accesos Rápidos</h3>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <button class="btn-secundario" style="width: 100%; padding: 10px;" onclick="cargarEntregasDesdeServidor(); cambiarSeccion('revision', document.querySelectorAll('.sidebar-btn')[1]);">
+                                Revisar entregas pendientes
+                            </button>
+                            <a href="index.html" class="btn-secundario" style="width: 100%; padding: 10px; box-sizing: border-box; text-decoration: none;">
+                                Ver página principal
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN: REVISIÓN DE TAREAS -->
+            <div id="revision" class="seccion-dashboard">
+                <h2>Revisión de Tareas y Entregas</h2>
+                <p>Aprueba o califica las entregas de tus estudiantes. Al aprobar, el progreso del estudiante se actualiza automáticamente.</p>
+
+                <div class="grid-modulos-tarjetas" id="gridEntregas">
+                    <!-- Las entregas se inyectan con JS -->
+                </div>
+            </div>
+
+            <!-- SECCIÓN: ESTUDIANTES -->
+            <div id="estudiantes" class="seccion-dashboard">
+                <h2>Mis Estudiantes</h2>
+                <p>Listado de los estudiantes registrados en la plataforma.</p>
+
+                <div class="contenedor-tabla">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaEstudiantes">
+                            <!-- JS inyectará los estudiantes -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SECCIÓN: MÓDULOS -->
+            <div id="modulos" class="seccion-dashboard">
+                <h2>Módulos Impartidos</h2>
+                <p>Programas que guías en la especialidad de Alambrismo.</p>
+
+                <div class="grid-modulos-tarjetas">
+                    <div class="tarjeta-modulo-item">
+                        <span class="badge-info">Básico</span>
+                        <h3 class="modulo-item-titulo">Fundamentos de Alambrismo</h3>
+                        <p class="modulo-item-desc">Anillos sencillos, pulseras de nudos y manejo básico de herramientas.</p>
+                        <span class="progreso-subtext">6 estudiantes · Semana 1-4</span>
+                    </div>
+                    <div class="tarjeta-modulo-item">
+                        <span class="badge-info">Intermedio</span>
+                        <h3 class="modulo-item-titulo">Técnicas de Engaste</h3>
+                        <p class="modulo-item-desc">Engaste de gota, dijes entrelazados y acabados de precisión.</p>
+                        <span class="progreso-subtext">5 estudiantes · Semana 5-8</span>
+                    </div>
+                    <div class="tarjeta-modulo-item">
+                        <span class="badge-info">Avanzado</span>
+                        <h3 class="modulo-item-titulo">Proyectos de Alta Tensión</h3>
+                        <p class="modulo-item-desc">Aretes geométricos y colgantes escultóricos con piedras.</p>
+                        <span class="progreso-subtext">3 estudiantes · Semana 9-12</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL CALIFICAR ENTREGA -->
+    <div id="modalCalificar" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-cerrar" onclick="cerrarModalCalificar()">✕</button>
+            <h3 class="modal-titulo">Calificar entrega</h3>
+
+            <label for="notaCalificacion">Nota (0 a 5):</label>
+            <input type="number" id="notaCalificacion" min="0" max="5" step="0.1" placeholder="Ej: 4.5">
+
+            <label for="comentarioCalificacion">Retroalimentación para el estudiante (opcional):</label>
+            <textarea id="comentarioCalificacion" rows="3" placeholder="Ej: Excelente técnica de engaste, cuida el pulido final..."></textarea>
+
+            <div class="modal-acciones" style="display: flex; gap: 10px; margin-top: 14px;">
+                <button type="button" class="btn-peligro" style="flex: 1;" onclick="cerrarModalCalificar()">Cancelar</button>
+                <button type="button" style="flex: 1;" onclick="guardarCalificacionModal()">Guardar Nota</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="portal-instructor.js"></script>
+</body>
+</html>

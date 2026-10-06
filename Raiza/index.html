@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAIZA - Escuela de Joyería y Orfebrería</title>
+    <!-- Evita el 404 de favicon -->
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="body-index">
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#inicio" class="nav-logo">RAIZA</a>
+            
+            <!-- Botón móvil -->
+            <button class="mobile-menu-btn" id="btnMenuMovil" aria-label="Abrir menú">☰</button>
+
+            <!-- Menú central -->
+            <ul class="nav-menu" id="menuPrincipal">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#cursos">Cursos</a></li>
+                <li><a href="#catalogo">Kits de Estudio</a></li>
+                <li><a href="#nosotros">Nuestra Escuela</a></li>
+                
+                <!-- Botones que solo aparecen en móvil -->
+                <li class="nav-mobile-only"><a href="login.html">Iniciar Sesión</a></li>
+                <li class="nav-mobile-only"><a href="login.html?action=register">Regístrate</a></li>
+            </ul>
+
+            <!-- Botones de la derecha (Escritorio) -->
+            <div class="nav-actions">
+                <a href="login.html" class="btn-login-nav">Iniciar Sesión</a>
+                <a href="login.html?action=register" class="btn-submit nav-btn-registro">Regístrate</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SECCIÓN: INICIO (HERO) -->
+    <section id="inicio" class="hero-section">
+        <div class="hero-content animacion-entrada">
+            <h1>Forja tu futuro en el arte de la <span class="resaltado">Joyería Profesional</span></h1>
+            <p>Plataforma educativa especializada para orfebres y diseñadores. Aprende con clases en video protegidas, realiza entregas de proyectos, interactúa con instructores y recibe tus materiales de trabajo directo en casa.</p>
+            
+            <div class="hero-botones">
+                <a href="login.html?action=register" class="btn-submit hero-btn">Unirse a la plataforma</a>
+                <a href="#cursos" class="btn-secundario hero-btn-alt">Ver planes de estudio</a>
+            </div>
+        </div>
+        
+        <div class="hero-imagen animacion-entrada">
+            <div class="hero-visual">
+                <div class="hero-circulo hero-circulo-uno"></div>
+                <div class="hero-circulo hero-circulo-dos"></div>
+                <div class="hero-emoji">💍</div>
+                <div class="hero-chip hero-chip-uno">✨ Educación especializada</div>
+                <div class="hero-chip hero-chip-dos">📦 Kits directos a casa</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BANDA DE ESTADÍSTICAS -->
+    <section class="banda-estadisticas animacion-entrada">
+        <div class="stat-item">
+            <div class="stat-numero">+18</div>
+            <div class="stat-etiqueta">Módulos especializados</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-numero">3</div>
+            <div class="stat-etiqueta">Niveles de formación</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-numero">100%</div>
+            <div class="stat-etiqueta">Práctico y seguro</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-numero">24/7</div>
+            <div class="stat-etiqueta">Portal del estudiante</div>
+        </div>
+    </section>
+
+   <!-- SECCIÓN: CURSOS (MÓDULOS ACADÉMICOS) -->
+    <section id="cursos" class="seccion-landing bg-claro">
+        <div class="contenedor-landing">
+            <h2 class="titulo-seccion">Nuestros Programas Académicos</h2>
+            <p class="texto-seccion">Especialízate en las técnicas más cotizadas de la bisutería artesanal: diseño en alambre, entramados de hilos y tejido de cuentas con precisión.</p>
+            
+            <div class="grid-tres-columnas">
+                <div class="tarjeta-curso animacion-entrada">
+                    <div class="tarjeta-icono">🌿</div>
+                    <h3>Técnicas de Alambrismo</h3>
+                    <p>Domina el arte del *wire wrapping*, creación de estructuras, espirales, argollas y engarces profesionales con alambre goldfield y cobre.</p>
+                    <span class="nivel-badge">Nivel Esencial</span>
+                </div>
+                <div class="tarjeta-curso animacion-entrada" style="transition-delay: 0.1s;">
+                    <div class="tarjeta-icono">🪢</div>
+                    <h3>Joyería en Macramé</h3>
+                    <p>Aprende nudos planos, festón y entramados complejos combinando hilos encerados con piedras naturales y cristales.</p>
+                    <span class="nivel-badge">Nivel Intermedio</span>
+                </div>
+                <div class="tarjeta-curso animacion-entrada" style="transition-delay: 0.2s;">
+                    <div class="tarjeta-icono">💎</div>
+                    <h3>Mostasilla y Delicas</h3>
+                    <p>Técnicas avanzadas de tejido de cuentas (Peyote, Brick Stitch y telar) para crear diseños geométricos y alta bisutería.</p>
+                    <span class="nivel-badge">Nivel Avanzado</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: CATÁLOGO DE KITS -->
+    <section id="catalogo" class="seccion-landing">
+        <div class="contenedor-landing">
+            <h2 class="titulo-seccion">ClassKits Especializados</h2>
+            <p class="texto-seccion">Recibe en casa las herramientas exactas y los insumos de alta calidad necesarios para cada técnica de tejido y ensamblaje.</p>
+            
+            <div class="grid-tres-columnas">
+                <div class="tarjeta-curso animacion-entrada">
+                    <div class="tarjeta-icono">🛠️</div>
+                    <h3>Kit de Alambrismo Inicial</h3>
+                    <p>Incluye pinza de punta redonda, pinza plana, alicate de corte, mandril medidor y rollos de alambre calibrado de práctica.</p>
+                    <span class="nivel-badge">Envío seguro</span>
+                </div>
+                <div class="tarjeta-curso animacion-entrada" style="transition-delay: 0.1s;">
+                    <div class="tarjeta-icono">🧶</div>
+                    <h3>Kit de Macramé y Piedras</h3>
+                    <p>Hilos encerados brasileños de alta resistencia, piedras naturales perforadas (cabujones), base de apoyo y tijeras de precisión.</p>
+                    <span class="nivel-badge">Envío seguro</span>
+                </div>
+                <div class="tarjeta-curso animacion-entrada" style="transition-delay: 0.2s;">
+                    <div class="tarjeta-icono">✨</div>
+                    <h3>Kit Master de Mostasilla</h3>
+                    <p>Agujas especiales para abalorios, hilos nylon ultraresistentes y un amplio surtido de mostasillas checas y delicas calibradas.</p>
+                    <span class="nivel-badge">Envío seguro</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: NOSOTROS -->
+    <section id="nosotros" class="seccion-landing bg-claro">
+        <div class="contenedor-landing">
+            <h2 class="titulo-seccion">Nuestra Escuela</h2>
+            <p class="texto-seccion">RAIZA nace para fusionar la tradición milenaria de la orfebrería con la tecnología moderna. Ofrecemos un portal privado de aprendizaje donde los estudiantes suben sus tareas en formato digital para revisión de instructores, participan en clases en vivo y gestionan sus pedidos de kits con total seguridad mediante autenticación avanzada por OTP y JWT.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-landing">
+        <p>&copy; 2026 RAIZA Platform. Todos los derechos reservados.</p>
+        <p style="margin: 6px 0 0; opacity: 0.85; font-size: 0.8rem;">educacion@raiza.com &middot; Plataforma de Educación en Joyería</p>
+    </footer>
+
+    <!-- Script exclusivo para la página principal -->
+    <script src="index.js"></script>
+</body>
+</html>

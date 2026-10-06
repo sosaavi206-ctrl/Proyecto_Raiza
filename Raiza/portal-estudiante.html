@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Portal - RAIZA Estudiantes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        
+        <!-- Menú Lateral -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <img src="https://via.placeholder.com/150?text=Foto" alt="Mi Foto" id="imgPerfilSidebar" class="sidebar-foto">
+                <h2 class="sidebar-titulo">Mi Portal</h2>
+            </div>
+            
+            <button class="sidebar-btn activo" onclick="cambiarSeccion('resumen', this)">Resumen General</button>
+            <button class="sidebar-btn" onclick="cambiarSeccion('perfil', this)">Mi Perfil</button>
+            <button class="sidebar-btn" onclick="cambiarSeccion('modulos', this)">Mis Módulos (Clases)</button>
+            <button class="sidebar-btn" onclick="cambiarSeccion('tareas', this)">Entregas y Proyectos</button>
+            <button class="sidebar-btn" onclick="cambiarSeccion('kits', this)">Catálogo de ClassKits</button>
+            <button class="sidebar-btn" onclick="cambiarSeccion('certificados', this)">Mis Certificados</button>
+            
+            <button class="sidebar-btn sidebar-btn-logout" onclick="cerrarSesion()">Cerrar Sesión</button>
+        </nav>
+
+        <!-- Área de Contenido Principal -->
+        <main class="dashboard-content">
+            
+            <!-- SECCIÓN: RESUMEN -->
+            <div id="resumen" class="panel seccion-dashboard activa">
+                <h2>Bienvenido a tu taller artesanal en línea</h2>
+                <p>Desde aquí podrás gestionar tu progreso en las técnicas de bisutería y orfebrería de RAIZA.</p>
+                <div class="resumen-grid">
+                    
+                    <!-- Círculo de Progreso Dinámico -->
+                    <div class="tarjeta-panel-dashboard tarjeta-progreso">
+                        <h3 class="tarjeta-titulo">Progreso General</h3>
+                        <div class="circulo-progreso" id="circuloProgreso">
+                            <div class="circulo-interno">
+                                <span class="circulo-texto" id="textoProgreso">0%</span>
+                            </div>
+                        </div>
+                        <p class="progreso-subtext">Completado del plan de estudios</p>
+                    </div>
+
+                    <div class="tarjeta-panel-dashboard">
+                        <h3 class="tarjeta-titulo">📅 Próximas Clases en Vivo</h3>
+                        <ul class="lista-dashboard">
+                            <li class="item-clase-principal"><div class="item-titulo">Alambrismo: Nudos Roseta</div><div class="item-subtext">Jueves, 18:00 hrs</div></li>
+                            <li class="item-clase-secundaria"><div class="item-titulo">Q&A: Mostasilla Geométrica</div><div class="item-subtext">Sábado, 10:00 hrs</div></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tarjeta-panel-dashboard">
+                        <h3 class="tarjeta-titulo">📝 Proyectos Pendientes</h3>
+                        <ul class="lista-dashboard" id="listaTareasResumen">
+                            <!-- JS insertará las tareas pendientes aquí -->
+                        </ul>
+                    </div>
+
+                    <div class="tarjeta-panel-dashboard comentarios-full">
+                        <h3 class="tarjeta-titulo">💬 Comentarios de tus Instructores</h3>
+                        <div class="comentario-caja">
+                            <div class="comentario-header"><span class="comentario-autor">Prof. Elena (Módulo de Macramé)</span><span class="comentario-fecha">Hace 2 días</span></div>
+                            <p class="comentario-texto">"¡Excelente trabajo con el nudo festón! Para tu próximo collar, recuerda mantener una tensión constante en el hilo base para que el tejido no se tuerza. ¡Vas muy bien!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN: MI PERFIL -->
+            <div id="perfil" class="panel seccion-dashboard">
+                <h2>Ajustes de Cuenta y Envío</h2>
+                <p>Gestiona tu información personal, tus preferencias y los datos para la entrega de tus herramientas.</p>
+                <div class="perfil-grid-principal">
+                    <div class="perfil-col-izq">
+                        <div class="tarjeta-ajustes" style="text-align: center;">
+                            <h3 style="text-align: left;">Foto de Perfil</h3>
+                            <div class="perfil-foto-wrapper">
+                                <img src="https://via.placeholder.com/160?text=Sube+tu+Foto" alt="Foto de perfil" id="imgPerfil" class="perfil-foto-img">
+                            </div>
+                            <input type="file" id="inputFotoPerfil" accept="image/*" class="campo-oculto">
+                            <div class="foto-acciones">
+                                <button class="btn-secundario" style="flex: 1; padding: 8px;" onclick="document.getElementById('inputFotoPerfil').click()">Cambiar</button>
+                                <button class="btn-peligro" style="flex: 1; padding: 8px;" onclick="borrarFotoPerfil()">Borrar</button>
+                            </div>
+                        </div>
+                        <div class="tarjeta-ajustes">
+                            <h3>Seguridad</h3>
+                            <button class="btn-secundario" style="width: 100%; margin-bottom: 10px;" onclick="alert('Enlace de recuperación enviado a tu correo.')">Cambiar Contraseña</button>
+                            <button class="btn-peligro" style="width: 100%;" onclick="alert('Contacta a soporte para proceder con la eliminación de tu cuenta.')">Eliminar Cuenta</button>
+                        </div>
+                    </div>
+                    <div class="perfil-col-der">
+                        <div class="tarjeta-ajustes">
+                            <h3>Información del Registro</h3>
+                            <form id="formPerfil">
+                                <div class="form-grid-2">
+                                    <div><label for="perfilDocumento">Cédula / Documento</label><input type="text" id="perfilDocumento" disabled></div>
+                                    <div><label for="perfilCorreo">Correo Electrónico (Login)</label><input type="email" id="perfilCorreo" disabled></div>
+                                    <div><label for="perfilNombre">Nombre Completo</label><input type="text" id="perfilNombre" required></div>
+                                    <div><label for="perfilTelefono">Teléfono / WhatsApp</label><input type="tel" id="perfilTelefono"></div>
+                                </div>
+                                <label for="perfilDireccion">Dirección de Taller/Casa (Para envío de ClassKits)</label>
+                                <input type="text" id="perfilDireccion" style="margin-bottom: 10px;">
+                                <button type="submit" style="align-self: flex-end;">Actualizar Datos</button>
+                            </form>
+                        </div>
+                        <div class="tarjeta-ajustes">
+                            <h3>Notificaciones y Privacidad</h3>
+                            <div class="toggle-container"><div class="toggle-label"><span>Notificaciones por WhatsApp</span><span class="toggle-desc">Recibe las guías de envío de tus materiales.</span></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                            <div class="toggle-container"><div class="toggle-label"><span>Boletín Creativo</span><span class="toggle-desc">Tips de diseño y avisos de nuevos módulos.</span></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                            <button class="btn-secundario" style="margin-top: 15px;" onclick="guardarPrivacidad()">Guardar Preferencias</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN: MÓDULOS (CLASES) -->
+            <div id="modulos" class="panel seccion-dashboard contenido-protegido">
+                <h2>Portal de Aprendizaje</h2>
+                <div class="tabs-niveles">
+                    <button class="btn-nivel activo-nivel" onclick="cambiarNivel('nivelAlambrismo', this)">Alambrismo</button>
+                    <button class="btn-nivel" onclick="cambiarNivel('nivelMacrame', this)">Macramé</button>
+                    <button class="btn-nivel" onclick="cambiarNivel('nivelMostasilla', this)">Mostasilla</button>
+                </div>
+                
+                <!-- ALAMBRISMO -->
+                <div id="nivelAlambrismo" class="contenedor-nivel activo-contenido">
+                    <p class="modulo-item-desc" style="margin-bottom: 20px;">Aprende *wire wrapping* y la manipulación técnica de alambres base y metales preciosos.</p>
+                    <div class="grid-modulos-tarjetas">
+                        <div class="tarjeta-modulo-item">
+                            <h3 class="modulo-item-titulo">Clase 1: Engarces Básicos y Nudo de Rosario</h3>
+                            <div class="visor-multimedia"><video controls controlsList="nodownload" disablePictureInPicture><source src="recursos/alambrismo-clase1.mp4" type="video/mp4"></video></div>
+                            <button class="btn-secundario" onclick="mostrarAvisoIntegracion('Plano - Engarces Básicos')">Descargar Guía de Cortes</button>
+                        </div>
+                        <div class="tarjeta-modulo-item">
+                            <h3 class="modulo-item-titulo">Clase 2: Estructura de Anillo Espiral</h3>
+                            <div class="visor-multimedia"><video controls controlsList="nodownload" disablePictureInPicture><source src="recursos/alambrismo-clase2.mp4" type="video/mp4"></video></div>
+                            <button class="btn-secundario" onclick="mostrarAvisoIntegracion('Plano - Anillo Espiral')">Descargar Guía de Cortes</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MACRAMÉ -->
+                <div id="nivelMacrame" class="contenedor-nivel">
+                    <p class="modulo-item-desc" style="margin-bottom: 20px;">Técnicas de entramado con hilos encerados y fijación de cabujones sin pegamento.</p>
+                    <div class="grid-modulos-tarjetas">
+                        <div class="tarjeta-modulo-item">
+                            <h3 class="modulo-item-titulo">Clase 1: Nudo Plano y Trenza de 4 hilos</h3>
+                            <div class="visor-multimedia"><video controls controlsList="nodownload" disablePictureInPicture><source src="recursos/macrame-clase1.mp4" type="video/mp4"></video></div>
+                            <button class="btn-secundario" onclick="mostrarAvisoIntegracion('Guía - Nudos Básicos')">Descargar Plantilla de Nudos</button>
+                        </div>
+                        <div class="tarjeta-modulo-item">
+                            <h3 class="modulo-item-titulo">Clase 2: Engaste de Piedra con Macramé</h3>
+                            <div class="visor-multimedia"><video controls controlsList="nodownload" disablePictureInPicture><source src="recursos/macrame-clase2.mp4" type="video/mp4"></video></div>
+                            <button class="btn-secundario" onclick="mostrarAvisoIntegracion('Guía - Engaste Macramé')">Descargar Plantilla de Nudos</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MOSTASILLA (Bloqueado simulando que requiere el kit avanzado) -->
+                <div id="nivelMostasilla" class="contenedor-nivel">
+                    <!-- Estado Bloqueado -->
+                    <div id="avisoKitBloqueado" class="aviso-integracion-box" style="border-color: var(--terracota-coral);">
+                        <div class="aviso-icono">🔒</div>
+                        <h3 class="aviso-titulo">Módulo de Mostasilla Bloqueado</h3>
+                        <p class="aviso-descripcion">
+                            Para iniciar con el tejido Miyuki (Peyote y Brick Stitch) requieres el <b>Kit Master de Mostasilla</b> (agujas especiales, hilo nylon y delicas calibradas). Adquiérelo para desbloquear las clases.
+                        </p>
+                        <button class="btn-secundario" style="width: auto; margin: 0 auto;" onclick="cambiarSeccion('kits', document.querySelectorAll('.sidebar-btn')[4])">Ir al Catálogo de ClassKits</button>
+                    </div>
+
+                    <!-- Estado Desbloqueado (Oculto por defecto) -->
+                    <div id="contenidoAvanzadoReal" class="campo-oculto">
+                        <p style="color: #64748B; margin-top: 0; margin-bottom: 20px;">Aprende técnicas tradicionales y geométricas de tejido con cuentas de vidrio.</p>
+                        <div class="grid-modulos-tarjetas">
+                            <div class="tarjeta-modulo-item">
+                                <h3 class="modulo-item-titulo">Clase 1: Puntada Peyote Par e Impar</h3>
+                                <div class="visor-multimedia"><video controls controlsList="nodownload" disablePictureInPicture><source src="recursos/mostasilla-clase1.mp4" type="video/mp4"></video></div>
+                                <button class="btn-secundario" onclick="mostrarAvisoIntegracion('Patrón - Peyote Básico')">Ver Patrón (PDF)</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN: TAREAS -->
+            <div id="tareas" class="panel seccion-dashboard">
+                <h2>Entrega de Proyectos</h2>
+                <p>Sube las fotos o videos de tus piezas terminadas. Tu instructor las revisará y calificará para avanzar en tu porcentaje de la plataforma.</p>
+
+                <h3 class="titulo-nivel-tarea">Alambrismo</h3>
+                <div class="grid-modulos-tarjetas" id="gridTareasBasico"></div>
+
+                <h3 class="titulo-nivel-tarea">Macramé</h3>
+                <div class="grid-modulos-tarjetas" id="gridTareasIntermedio"></div>
+
+                <h3 class="titulo-nivel-tarea">Mostasilla</h3>
+                <div class="grid-modulos-tarjetas" id="gridTareasAvanzado"></div>
+            </div>
+            
+            <!-- SECCIÓN: CATÁLOGO DE KITS -->
+            <div id="kits" class="panel seccion-dashboard">
+                <h2>Catálogo de ClassKits y Seguimiento</h2>
+                <div class="catalogo-grid" id="catalogoKitsDinamico">
+                    <div class="tarjeta-kit-catalogo">
+                        <div class="kit-imagen-container"><span class="kit-badge-proyecto">Módulo de Alambrismo</span><div class="kit-imagen-placeholder">🛠️</div></div>
+                        <div class="kit-info-body">
+                            <h3 class="kit-titulo">Kit de Alambrismo Inicial</h3>
+                            <p class="kit-descripcion">Incluye pinzas (plana, redonda y corte), mandril y 3 rollos de alambre de cobre de diferentes calibres.</p>
+                            <div class="kit-footer-card"><span class="kit-precio">$45.000</span><button class="btn-comprar-kit" onclick="abrirModalKitPorId(1)">Solicitar Kit</button></div>
+                        </div>
+                    </div>
+                    <div class="tarjeta-kit-catalogo">
+                        <div class="kit-imagen-container"><span class="kit-badge-proyecto">Módulo de Macramé</span><div class="kit-imagen-placeholder">🧶</div></div>
+                        <div class="kit-info-body">
+                            <h3 class="kit-titulo">Kit de Tejido y Piedras</h3>
+                            <p class="kit-descripcion">Hilos encerados brasileños surtidos, base de apoyo, tijeras de precisión y 5 cabujones de piedra natural.</p>
+                            <div class="kit-footer-card"><span class="kit-precio">$35.000</span><button class="btn-comprar-kit" onclick="abrirModalKitPorId(2)">Solicitar Kit</button></div>
+                        </div>
+                    </div>
+                    <div class="tarjeta-kit-catalogo">
+                        <div class="kit-imagen-container"><span class="kit-badge-proyecto">Módulo de Mostasilla</span><div class="kit-imagen-placeholder">✨</div></div>
+                        <div class="kit-info-body">
+                            <h3 class="kit-titulo">Kit Master de Miyuki</h3>
+                            <p class="kit-descripcion">Agujas extrafinas, carrete de hilo nylon especial y 8 colores de mostasillas cilíndricas calibradas.</p>
+                            <div class="kit-footer-card"><span class="kit-precio">$75.000</span><button class="btn-comprar-kit" onclick="abrirModalKitPorId(3)">Solicitar Kit</button></div>
+                        </div>
+                    </div>
+                </div>
+                <h3 style="color: var(--verde-oliva); margin-top: 40px; margin-bottom: 15px;">Seguimiento de mis Pedidos</h3>
+                <div class="contenedor-tabla">
+                    <table>
+                        <thead><tr><th>ID Pedido</th><th>ClassKit Solicitado</th><th>Fecha</th><th>Estado de Envío</th></tr></thead>
+                        <tbody id="tablaMisKits">
+                            <tr><td>#1042</td><td>Kit de Alambrismo Inicial</td><td>15/10/2026</td><td><span class="estado-en-camino">En Camino</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SECCIÓN: CERTIFICADOS -->
+            <div id="certificados" class="panel seccion-dashboard">
+                <h2>Mis Certificados</h2>
+                <div class="aviso-integracion-box">
+                    <div class="aviso-icono">🎓</div><h3 class="aviso-titulo">Sección en Proceso de Integración</h3>
+                    <p class="aviso-descripcion">Pronto podrás descargar aquí tu diploma oficial firmado por los artesanos e instructores de RAIZA al completar el 100% de la plataforma.</p>
+                    <span class="badge-proximamente">Próximamente</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL CHECKOUT KITS -->
+    <div id="modalKit" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-cerrar" onclick="cerrarModalKit()">✕</button>
+            <h3 class="modal-titulo" id="modalKitTitulo">Solicitar Kit</h3>
+            <form id="formCheckoutKit">
+                <label for="nombreEnvio">Nombre Completo de quien recibe:</label><input type="text" id="nombreEnvio" required>
+                <label for="direccionEnvio">Dirección Completa de Domicilio:</label><input type="text" id="direccionEnvio" required>
+                <label for="metodoPago">Método de Pago:</label>
+                <select id="metodoPago" required onchange="cambiarMetodoPago()">
+                    <option value="">Selecciona un método</option><option value="PSE">PSE (Pagos Seguros en Línea)</option><option value="Tarjeta">Tarjeta de Crédito / Débito</option>
+                </select>
+                <div id="seccionPse" class="campo-oculto contenedor-pse">
+                    <label for="bancoPse">Banco:</label><select id="bancoPse"><option value="">-- Elige tu banco --</option><option value="Bancolombia">Bancolombia</option><option value="Nequi (PSE)">Nequi</option><option value="Daviplata">Daviplata</option></select>
+                    <label for="tipoDocumento">Documento del titular:</label><select id="tipoDocumento"><option value="CC">Cédula (CC)</option></select>
+                    <label for="numeroDocumento">Número de documento:</label><input type="text" id="numeroDocumento">
+                </div>
+                <button type="submit" style="margin-top: 10px;">Confirmar y Pagar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL SUBIR / EDITAR TAREA -->
+    <div id="modalTarea" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-cerrar" onclick="cerrarModalTarea()">✕</button>
+            <h3 class="modal-titulo" id="modalTareaTitulo">Entregar Proyecto Finalizado</h3>
+            <form id="formSubirTareaDin">
+                <label for="comentarioTareaDin">Comentarios adicionales para el maestro artesano:</label>
+                <input type="text" id="comentarioTareaDin" placeholder="Opcional: Ejemplo: 'Tuve dificultad al cerrar la argolla...'">
+                <label for="archivoTareaDin">Sube las fotos de tu pieza terminada (máximo 10 MB) o pega un enlace de video de Google Drive / YouTube en los comentarios:</label>
+                <input type="file" id="archivoTareaDin" accept=".pdf,.jpg,.jpeg,.png,.mp4" style="background: var(--blanco);">
+                <button type="submit" style="margin-top: 10px;">Guardar y Enviar a Revisión</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="portal-estudiante.js"></script>
+</body>
+</html>
