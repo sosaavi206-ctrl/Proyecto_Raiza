@@ -1,0 +1,18 @@
+# Build
+bin/
+obj/
+
+# IDE
+.vs/
+*.user
+*.suo
+
+# Publicación
+publish/
+
+# Configuración local con secretos (los user-secrets viven fuera de la carpeta del proyecto)
+appsettings.*.local.json
+
+# Archivos subidos por los estudiantes (se generan en wwwroot/entregas)
+wwwroot/
+wwwroot/entregas/
